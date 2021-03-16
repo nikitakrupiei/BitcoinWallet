@@ -22,3 +22,7 @@ class EnvironmentConfiguration {
 class NetworkPauseConfiguration {
     static var bitcoinRateRequestPauseHours = 1
 }
+
+class BitcoinConfiguration {
+    static var maximumBitcoinAmountInTheWorld: Int64 = 21_000_000
+}

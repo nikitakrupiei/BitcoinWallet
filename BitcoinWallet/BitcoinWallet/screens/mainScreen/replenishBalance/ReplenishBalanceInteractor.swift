@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol ReplenishBalanceInteractorDelegate{
     func presentError(error: Error)
@@ -15,4 +16,12 @@ protocol ReplenishBalanceInteractorDelegate{
 
 class ReplenishBalanceInteractor: ReplenishBalanceViewDelegate{
     var delegate: ReplenishBalanceInteractorDelegate?
+    
+    func replenishBalance(balance: Int64) {
+        CurrentBalanceService.replenishBalance(balance: balance)
+    }
+    
+    private func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance> {
+        return CurrentBalanceService.fetchedCurrentBalance()
+    }
 }

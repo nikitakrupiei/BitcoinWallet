@@ -16,15 +16,9 @@ class WalletRouter{
         self.vc = vc
     }
     
-    func navigateToReplenishBalance() {
+    func navigateToReplenishBalance(currentBalance: Int64) {
         let replenishView = ReplenishBalanceViewController(nibName: nil, bundle: nil)
-//        replenishView.modalPresentationStyle = .fullScreen
-//        vc.present(replenishView, animated: true)
-        
-//        vc.addChild(replenishView)
-//        //replenishView.view.frame = vc.view.frame
-//        vc.view.addSubview(replenishView.view)
-//        replenishView.didMove(toParent: vc)
+        replenishView.currentBitcoinAmount = currentBalance
         
         self.vc.addChild(replenishView)
         replenishView.view.frame = vc.view.frame

@@ -36,6 +36,11 @@ class PersistentService {
         return PersistentService.shared.persistentContainer.viewContext
     }
     
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        context.saveIfNeed()
+    }
+    
     static func addOne<Entity: NSManagedObject & Decodable>(data: Data, ofType type: Entity.Type, success:@escaping((Entity)->()), fail:@escaping((Error)->())) {
         let context = PersistentService.context
         DecodableService.decodeOne(data: data, context: context, success: { (result: Entity) in

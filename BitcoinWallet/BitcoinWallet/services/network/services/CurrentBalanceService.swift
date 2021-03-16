@@ -24,6 +24,29 @@ class CurrentBalanceService {
         return aFetchedResultsController
     }
     
+    static func replenishBalance(balance: Int64) {
+        let context = PersistentService.context
+        let fetchRequest: NSFetchRequest<CurrentBalance> = CurrentBalance.fetchRequest()
+        fetchRequest.fetchBatchSize = 20
+        fetchRequest.sortDescriptors = []
+        
+        do {
+            let balanceObjext = try context.fetch(fetchRequest)
+            
+            if let currentBalance = balanceObjext.first {
+                currentBalance.balance += balance
+            } else {
+                let newBalance = CurrentBalance(context: context)
+                newBalance.balance = balance
+            }
+            
+            context.saveIfNeed()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
     static var defaultBalance: String {
         return "0\(CurrencyType.BTC.sign)"
     }

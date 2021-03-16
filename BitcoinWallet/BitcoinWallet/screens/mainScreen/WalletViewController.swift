@@ -178,7 +178,8 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     }
     
     @objc func navigateToReplenishBalance() {
-        router?.navigateToReplenishBalance()
+        let currentBalance = fetchedCurrentBalance?.fetchedObjects?.first?.balance ?? 0
+        router?.navigateToReplenishBalance(currentBalance: currentBalance)
     }
     
     func showStartBusy() {
@@ -205,6 +206,8 @@ extension WalletViewController: NSFetchedResultsControllerDelegate{
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
         if controller == fetchedBitcoinRate {
             updateRateLabelValue()
+        } else if controller == fetchedCurrentBalance {
+            updateCurrentBalanceLabelValue()
         }
     }
 }

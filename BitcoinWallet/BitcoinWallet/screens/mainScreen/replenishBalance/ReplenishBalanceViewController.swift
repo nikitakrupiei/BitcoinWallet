@@ -9,12 +9,16 @@ import UIKit
 import Stevia
 
 protocol ReplenishBalanceViewDelegate{
+    func replenishBalance(balance: Int64)
 }
 
-class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePresenterDelegate{
+class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePresenterDelegate {
     
     var delegate: ReplenishBalanceViewDelegate?
     var router: ReplenishBalanceRouter?
+    
+    var amountTextField: UITextField?
+    var currentBitcoinAmount: Int64 = 0
     
     override func settings() {
         super.settings()
@@ -27,9 +31,40 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
     }
     
     private func setUI() {
-        
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
+        let mainStack = createMainStack()
+        
+        let headerStackView = createHeaderStackView()
+        
+        
+        let replenishDescription = ViewsManager.createLabel(numberOfLines: 3, font: .systemFont(ofSize: 16, weight: .medium), textAlignment: .center)
+        replenishDescription.text = "Enter the amount to replenish your Bitcoin account"
+        
+        
+        let confirmButton = CornerButton()
+        confirmButton.setTitle("Confirm", for: .normal)
+        confirmButton.backgroundColor = AppColor.bitcoinOrange.color()
+        confirmButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        confirmButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
+        confirmButton.width(>=150)
+        confirmButton.addTarget(self, action: #selector(replenishWallet), for: .touchUpInside)
+        
+        
+        let textFieldContainer = createReplenishTextField()
+        
+        mainStack.addArrangedSubview(headerStackView)
+        headerStackView.fillHorizontally()
+        mainStack.addArrangedSubview(replenishDescription)
+        replenishDescription.fillHorizontally()
+        
+        mainStack.addArrangedSubview(textFieldContainer)
+        textFieldContainer.fillHorizontally()
+        
+        mainStack.addArrangedSubview(confirmButton)
+    }
+    
+    private func createMainStack() -> UIStackView {
         let mainView = UIView()
         self.view.sv(mainView)
         
@@ -38,30 +73,52 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         mainView.fillHorizontally(m: 30).centerVertically()
         mainView.layer.cornerRadius = 24
         
-        let stack = ViewsManager.createStackView(spacing: 8)
-        mainView.sv(stack)
-        stack.fillContainer(16)
+        let mainStack = ViewsManager.createStackView(alignment: .center, spacing: 8)
+        mainView.sv(mainStack)
+        mainStack.fillContainer(16)
+        
+        return mainStack
+    }
+    
+    private func createHeaderStackView() -> UIStackView {
+        let additionView = UIView()
+        additionView.size(24)
         
         let closeButton = UIButton()
         closeButton.setImage(#imageLiteral(resourceName: "closeIcon").withRenderingMode(.alwaysTemplate), for: .normal)
         closeButton.tintColor = AppColor.bitcoinGrey.color()
         closeButton.size(24)
         closeButton.addTarget(self, action: #selector(removeAnimation), for: .touchUpInside)
-//        addTransactionButton.layer.cornerRadius = 8
-//        addTransactionButton.s
-//        addTransactionButton.setTitle("Add transaction", for: .normal)
-//        addTransactionButton.backgroundColor = AppColor.bitcoinOrange.color()
-//        addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-//        addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
-//        addTransactionButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+
+        let replenishTitle = ViewsManager.createLabel(font: .systemFont(ofSize: 20, weight: .semibold), textAlignment: .center)
+        replenishTitle.text = "Replenishment"
         
-        let addTransactionButttonStack = ViewsManager.createStackView(axis: .horizontal, spacing: 8)
-        addTransactionButttonStack.addArrangedSubview(UIView())
-        addTransactionButttonStack.addArrangedSubview(closeButton)
+        let headerStackView = ViewsManager.createStackView(axis: .horizontal, spacing: 8)
+        headerStackView.addArrangedSubview(additionView)
+        headerStackView.addArrangedSubview(replenishTitle)
+        headerStackView.addArrangedSubview(closeButton)
         
+        return headerStackView
+    }
+    
+    private func createReplenishTextField() -> UIView{
+        let textFieldContainer = UIView()
         
-        stack.addArrangedSubview(addTransactionButttonStack)
-        stack.addArrangedSubview(UIView())
+        amountTextField = UITextField()
+        amountTextField?.keyboardType = .numberPad
+        amountTextField?.borderStyle = .roundedRect
+        amountTextField?.font = .systemFont(ofSize: 20, weight: .semibold)
+        amountTextField?.textColor = AppColor.bitcoinGrey.color()
+        amountTextField?.height(50)
+        amountTextField?.delegate = self
+        
+        if let amountTextField = amountTextField {
+            textFieldContainer.sv(amountTextField)
+            amountTextField.fillHorizontally()
+            amountTextField.centerVertically()
+        }
+        
+        return textFieldContainer
     }
     
     func close() {
@@ -92,6 +149,16 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         }
     }
     
+    @objc func replenishWallet() {
+        guard let text = amountTextField?.text, !text.isEmpty, let newBalance = Int64(text) else {
+            self.showError(message: "You must enter bitcoins amount to replenish")
+            return
+        }
+        
+        delegate?.replenishBalance(balance: newBalance)
+        removeAnimation()
+    }
+    
     func showStartBusy() {
     }
     
@@ -102,5 +169,24 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
 extension ReplenishBalanceViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return (touch.view === self.view)
+    }
+}
+
+extension ReplenishBalanceViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        guard !string.isEmpty, let text = textField.text else {
+            return true
+        }
+        
+        /// check number is postive and less then total amount of bitcoins in the world
+        let formatter = NumberFormatter()
+        let finalString = (text as NSString).replacingCharacters(in: range, with: string)
+        let number = formatter.number(from: finalString)
+        
+        guard let enteredNumber  = number?.int64Value else {
+            return false
+        }
+        return enteredNumber > 0 && enteredNumber < (BitcoinConfiguration.maximumBitcoinAmountInTheWorld - currentBitcoinAmount)
     }
 }
