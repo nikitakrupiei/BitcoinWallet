@@ -16,7 +16,7 @@ class BitcoinRate: NSManagedObject, Codable {
     }
 
     var usdRate: String? {
-        guard let rate = bpi?.usd?.rate else {
+        guard rate != 0 else {
             return nil
         }
         return "\(rate.currencyFormat())\(CurrencyType.USD.sign) per 1\(CurrencyType.BTC.sign)"
@@ -32,7 +32,7 @@ class BitcoinRate: NSManagedObject, Codable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.chartName = try container.decode(String.self, forKey: .chartName)
-        self.bpi = try container.decodeIfPresent(BitcoinRateDPI.self, forKey: .bpi)
+        self.rate = try container.decodeIfPresent(BitcoinRateDPI.self, forKey: .bpi)?.usd?.rate ?? 0
         
     }
     
@@ -72,12 +72,5 @@ class BitcoinRateToCurrency:  NSObject, NSSecureCoding, Decodable {
     
     required init?(coder: NSCoder) {
         rate = coder.decodeObject(of: NSNumber.self, forKey: CodingKeys.rate.rawValue)?.doubleValue
-    }
-}
-
-class BitcoinRateNSSecureUnarchiveTransformer: NSSecureUnarchiveTransformer {
-    static let shared = BitcoinRateNSSecureUnarchiveTransformer()
-    var allowedClasses: [AnyClass] {
-        return [BitcoinRateToCurrency.self, BitcoinRateDPI.self]
     }
 }

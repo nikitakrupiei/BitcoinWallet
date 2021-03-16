@@ -34,9 +34,34 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         self.view.sv(mainView)
         
         mainView.heightEqualsWidth()
-        mainView.backgroundColor = .red
+        mainView.backgroundColor = .white
         mainView.fillHorizontally(m: 30).centerVertically()
         mainView.layer.cornerRadius = 24
+        
+        let stack = ViewsManager.createStackView(spacing: 8)
+        mainView.sv(stack)
+        stack.fillContainer(16)
+        
+        let closeButton = UIButton()
+        closeButton.setImage(#imageLiteral(resourceName: "closeIcon").withRenderingMode(.alwaysTemplate), for: .normal)
+        closeButton.tintColor = AppColor.bitcoinGrey.color()
+        closeButton.size(24)
+        closeButton.addTarget(self, action: #selector(removeAnimation), for: .touchUpInside)
+//        addTransactionButton.layer.cornerRadius = 8
+//        addTransactionButton.s
+//        addTransactionButton.setTitle("Add transaction", for: .normal)
+//        addTransactionButton.backgroundColor = AppColor.bitcoinOrange.color()
+//        addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+//        addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
+//        addTransactionButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        
+        let addTransactionButttonStack = ViewsManager.createStackView(axis: .horizontal, spacing: 8)
+        addTransactionButttonStack.addArrangedSubview(UIView())
+        addTransactionButttonStack.addArrangedSubview(closeButton)
+        
+        
+        stack.addArrangedSubview(addTransactionButttonStack)
+        stack.addArrangedSubview(UIView())
     }
     
     func close() {

@@ -12,11 +12,6 @@ class Application {
     static var shared = Application()
     private init(){}
     
-    func initialize() {
-        if #available(iOS 12.0, *) {
-            NSSecureUnarchiveTransformerRegistrator.register()
-        }
-    }
     
     var topViewController: UIViewController? {
         if var top = UIApplication.shared.keyWindow?.rootViewController {
@@ -32,7 +27,7 @@ class Application {
         guard isNeedRateUpdate else {
             return
         }
-        
+
         BitcoinRateService.getBitcoinRate(success: { _ in
             self.lastDateRateUpdated = Date()
         }, fail: { error in

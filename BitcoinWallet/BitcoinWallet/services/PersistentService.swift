@@ -73,22 +73,3 @@ extension NSManagedObjectContext {
 protocol NSSecureUnarchiveTransformer {
     var allowedClasses: [AnyClass] { get }
 }
-
-@available(iOS 12.0, *)
-@objc(NSSecureUnarchiveTransformerRegistrator)
-class NSSecureUnarchiveTransformerRegistrator: NSSecureUnarchiveFromDataTransformer {
-    
-    static let name = NSValueTransformerName(rawValue: "NSSecureUnarchiveTransformerRegistrator")
-
-    override static var allowedTopLevelClasses: [AnyClass] {
-        return super.allowedTopLevelClasses +
-            BitcoinRateNSSecureUnarchiveTransformer.shared.allowedClasses
-    }
-
-    public static func register() {
-        guard let _ = ValueTransformer(forName: name) else {
-            ValueTransformer.setValueTransformer(NSSecureUnarchiveTransformerRegistrator(), forName: name)
-            return
-        }
-    }
-}
