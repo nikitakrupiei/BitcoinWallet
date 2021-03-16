@@ -103,6 +103,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         addTransactionButton.backgroundColor = .white
         addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
+        addTransactionButton.addTarget(self, action: #selector(navigateToReplenishBalance), for: .touchUpInside)
         
         if let currencyLabel = currencyLabel {
             infoStack.addArrangedSubview(currencyLabel)
@@ -174,6 +175,10 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     
     func updateCurrentBalanceLabelValue() {
         currentBalanceLabel?.text = fetchedCurrentBalance?.fetchedObjects?.first?.currentBalance ?? CurrentBalanceService.defaultBalance
+    }
+    
+    @objc func navigateToReplenishBalance() {
+        router?.navigateToReplenishBalance()
     }
     
     func showStartBusy() {

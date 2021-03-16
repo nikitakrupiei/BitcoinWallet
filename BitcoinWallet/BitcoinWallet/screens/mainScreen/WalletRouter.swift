@@ -15,4 +15,20 @@ class WalletRouter{
     init(vc: WalletViewController) {
         self.vc = vc
     }
+    
+    func navigateToReplenishBalance() {
+        let replenishView = ReplenishBalanceViewController(nibName: nil, bundle: nil)
+//        replenishView.modalPresentationStyle = .fullScreen
+//        vc.present(replenishView, animated: true)
+        
+//        vc.addChild(replenishView)
+//        //replenishView.view.frame = vc.view.frame
+//        vc.view.addSubview(replenishView.view)
+//        replenishView.didMove(toParent: vc)
+        
+        self.vc.addChild(replenishView)
+        replenishView.view.frame = vc.view.frame
+        self.vc.view.addSubview(replenishView.view)
+        replenishView.didMove(toParent: vc)
+    }
 }
