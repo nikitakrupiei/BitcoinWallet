@@ -8,21 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		84D25FD42600888400B9B332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FD32600888400B9B332 /* AppDelegate.swift */; };
-		84D25FD82600888400B9B332 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FD72600888400B9B332 /* ViewController.swift */; };
 		84D25FDB2600888400B9B332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FD92600888400B9B332 /* Main.storyboard */; };
 		84D25FDD2600888600B9B332 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FDC2600888600B9B332 /* Assets.xcassets */; };
 		84D25FE02600888600B9B332 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FDE2600888600B9B332 /* LaunchScreen.storyboard */; };
+		84D25FFD26008DC500B9B332 /* WalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FF826008DC500B9B332 /* WalletPresenter.swift */; };
+		84D25FFE26008DC500B9B332 /* WalletRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FF926008DC500B9B332 /* WalletRouter.swift */; };
+		84D25FFF26008DC500B9B332 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FFA26008DC500B9B332 /* WalletViewController.swift */; };
+		84D2600026008DC500B9B332 /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FFB26008DC500B9B332 /* WalletInteractor.swift */; };
+		84D2600126008DC500B9B332 /* WalletConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D25FFC26008DC500B9B332 /* WalletConfigurator.swift */; };
+		84D2600626008DFC00B9B332 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2600526008DFC00B9B332 /* ViewControllers.swift */; };
 		E18C495EB66218A6B8C268CE /* Pods_BitcoinWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		84D25FD02600888400B9B332 /* BitcoinWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitcoinWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D25FD32600888400B9B332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84D25FD72600888400B9B332 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84D25FDA2600888400B9B332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84D25FDC2600888600B9B332 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D25FDF2600888600B9B332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D25FE12600888600B9B332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D25FF826008DC500B9B332 /* WalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPresenter.swift; sourceTree = "<group>"; };
+		84D25FF926008DC500B9B332 /* WalletRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouter.swift; sourceTree = "<group>"; };
+		84D25FFA26008DC500B9B332 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		84D25FFB26008DC500B9B332 /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
+		84D25FFC26008DC500B9B332 /* WalletConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConfigurator.swift; sourceTree = "<group>"; };
+		84D2600526008DFC00B9B332 /* ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllers.swift; sourceTree = "<group>"; };
 		B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.debug.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitcoinWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.release.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,14 +71,43 @@
 		84D25FD22600888400B9B332 /* BitcoinWallet */ = {
 			isa = PBXGroup;
 			children = (
-				84D25FD32600888400B9B332 /* AppDelegate.swift */,
-				84D25FD72600888400B9B332 /* ViewController.swift */,
+				84D2600426008DDE00B9B332 /* components */,
+				84D25FF626008D8D00B9B332 /* screens */,
 				84D25FD92600888400B9B332 /* Main.storyboard */,
+				84D25FD32600888400B9B332 /* AppDelegate.swift */,
 				84D25FDC2600888600B9B332 /* Assets.xcassets */,
 				84D25FDE2600888600B9B332 /* LaunchScreen.storyboard */,
 				84D25FE12600888600B9B332 /* Info.plist */,
 			);
 			path = BitcoinWallet;
+			sourceTree = "<group>";
+		};
+		84D25FF626008D8D00B9B332 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				84D25FF726008D9500B9B332 /* mainScreen */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		84D25FF726008D9500B9B332 /* mainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				84D25FFA26008DC500B9B332 /* WalletViewController.swift */,
+				84D25FFB26008DC500B9B332 /* WalletInteractor.swift */,
+				84D25FF826008DC500B9B332 /* WalletPresenter.swift */,
+				84D25FF926008DC500B9B332 /* WalletRouter.swift */,
+				84D25FFC26008DC500B9B332 /* WalletConfigurator.swift */,
+			);
+			path = mainScreen;
+			sourceTree = "<group>";
+		};
+		84D2600426008DDE00B9B332 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				84D2600526008DFC00B9B332 /* ViewControllers.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		D37B03B26853C7CE420E0B50 /* Pods */ = {
@@ -202,8 +241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D25FD82600888400B9B332 /* ViewController.swift in Sources */,
+				84D2600126008DC500B9B332 /* WalletConfigurator.swift in Sources */,
+				84D2600626008DFC00B9B332 /* ViewControllers.swift in Sources */,
 				84D25FD42600888400B9B332 /* AppDelegate.swift in Sources */,
+				84D25FFD26008DC500B9B332 /* WalletPresenter.swift in Sources */,
+				84D25FFE26008DC500B9B332 /* WalletRouter.swift in Sources */,
+				84D25FFF26008DC500B9B332 /* WalletViewController.swift in Sources */,
+				84D2600026008DC500B9B332 /* WalletInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
