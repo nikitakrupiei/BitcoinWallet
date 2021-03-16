@@ -18,3 +18,7 @@ class EnvironmentConfiguration {
         return "/v1"
     }
 }
+
+class NetworkPauseConfiguration {
+    static var bitcoinRateRequestPauseHours = 1
+}
