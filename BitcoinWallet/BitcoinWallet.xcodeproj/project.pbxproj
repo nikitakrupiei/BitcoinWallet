@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		84D25FDB2600888400B9B332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FD92600888400B9B332 /* Main.storyboard */; };
 		84D25FDD2600888600B9B332 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FDC2600888600B9B332 /* Assets.xcassets */; };
 		84D25FE02600888600B9B332 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D25FDE2600888600B9B332 /* LaunchScreen.storyboard */; };
+		E18C495EB66218A6B8C268CE /* Pods_BitcoinWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		84D25FDC2600888600B9B332 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D25FDF2600888600B9B332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D25FE12600888600B9B332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.debug.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.debug.xcconfig"; sourceTree = "<group>"; };
+		C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitcoinWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.release.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18C495EB66218A6B8C268CE /* Pods_BitcoinWallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				84D25FD22600888400B9B332 /* BitcoinWallet */,
 				84D25FD12600888400B9B332 /* Products */,
+				D37B03B26853C7CE420E0B50 /* Pods */,
+				E2A89A2802B52C4ABF8C4899 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = BitcoinWallet;
 			sourceTree = "<group>";
 		};
+		D37B03B26853C7CE420E0B50 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */,
+				FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E2A89A2802B52C4ABF8C4899 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D25FE42600888600B9B332 /* Build configuration list for PBXNativeTarget "BitcoinWallet" */;
 			buildPhases = (
+				513AAF47A86B3055A5C09C3F /* [CP] Check Pods Manifest.lock */,
 				84D25FCC2600888400B9B332 /* Sources */,
 				84D25FCD2600888400B9B332 /* Frameworks */,
 				84D25FCE2600888400B9B332 /* Resources */,
+				0A0DEC94E9114F030CED8B95 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,6 +154,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A0DEC94E9114F030CED8B95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		513AAF47A86B3055A5C09C3F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BitcoinWallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84D25FCC2600888400B9B332 /* Sources */ = {
@@ -279,39 +347,47 @@
 		};
 		84D25FE52600888600B9B332 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 493K3DK7Y5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikita.krupiei.BitcoinWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		84D25FE62600888600B9B332 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 493K3DK7Y5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nikita.krupiei.BitcoinWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
