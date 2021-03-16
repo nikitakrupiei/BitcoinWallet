@@ -13,18 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        Application.shared.initialize()
         setInitialScreen()
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Application.shared.getBitcoinRate()
     }
 }
 
 extension AppDelegate {
     func setInitialScreen(){
-        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav1 = UINavigationController()
-        let mainView = WalletViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        let mainView = WalletViewController(nibName: nil, bundle: nil)
         nav1.viewControllers = [mainView]
         self.window!.rootViewController = nav1
         self.window?.makeKeyAndVisible()

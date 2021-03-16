@@ -172,9 +172,18 @@ extension UIViewController {
 }
 
 protocol BasePresenterDelegate: class {
+    func showError(message: String)
 }
 
 extension UIViewController: BasePresenterDelegate {
+    
+    func showError(message: String) {
+        func showError(message: String) {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
     
     func back(){
         self.navigationController?.popViewController(animated: true)

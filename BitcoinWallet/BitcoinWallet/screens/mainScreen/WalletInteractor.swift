@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol WalletInteractorDelegate{
     func presentError(error: Error)
@@ -15,4 +16,8 @@ protocol WalletInteractorDelegate{
 
 class WalletInteractor: WalletViewDelegate{
     var delegate: WalletInteractorDelegate?
+    
+    func fetchedBitcoinRate() -> NSFetchedResultsController<BitcoinRate> {
+        return BitcoinRateService.fetchedBitcoinRate()
+    }
 }

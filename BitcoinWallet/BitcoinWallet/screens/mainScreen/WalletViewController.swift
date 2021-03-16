@@ -7,8 +7,10 @@
 
 import UIKit
 import Stevia
+import CoreData
 
 protocol WalletViewDelegate{
+    func fetchedBitcoinRate() -> NSFetchedResultsController<BitcoinRate>
 }
 
 class WalletViewController: BaseViewController,  WalletPresenterDelegate{
@@ -16,10 +18,16 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     var delegate: WalletViewDelegate?
     var router: WalletRouter?
     
+    private var currencyLabel: UILabel?
+    private var fetchedBitcoinRate: NSFetchedResultsController<BitcoinRate>?
+    
     override func settings() {
         super.settings()
         WalletConfigurator.shared.configure(vc: self)
         setTopBarLightContentStyle()
+        
+        fetchedBitcoinRate = delegate?.fetchedBitcoinRate()
+        fetchedBitcoinRate?.delegate = self
         
         setUI()
     }
@@ -67,9 +75,8 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     private func createMainInfoStack() -> UIStackView {
         let infoStack = ViewsManager.createStackView(spacing: 16)
         
-        let currencyLabel = ViewsManager.createLabel(font: .systemFont(ofSize: 24, weight: .semibold), textAlignment: .right)
-        currencyLabel.text = "50 000$ per 1₿"
-    
+        currencyLabel = ViewsManager.createLabel(font: .systemFont(ofSize: 24, weight: .semibold), textAlignment: .right)
+        updateRateLabelValue()
         
         let balanceTextStack = ViewsManager.createStackView(spacing: 4)
         
@@ -89,8 +96,9 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
         
-        
-        infoStack.addArrangedSubview(currencyLabel)
+        if let currencyLabel = currencyLabel {
+            infoStack.addArrangedSubview(currencyLabel)
+        }
         infoStack.addArrangedSubview(balanceTextStack)
         infoStack.addArrangedSubview(addTransactionButton)
         
@@ -152,6 +160,10 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         return transactionStack
     }
     
+    func updateRateLabelValue() {
+        currencyLabel?.text = fetchedBitcoinRate?.fetchedObjects?.first?.usdRate
+    }
+    
     func showStartBusy() {
     }
     
@@ -169,6 +181,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = "Transaction : \(indexPath.row + 1)"
         return cell
     }
+}
+
+extension WalletViewController: NSFetchedResultsControllerDelegate{
     
-    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
+        if controller == fetchedBitcoinRate {
+            updateRateLabelValue()
+        }
+    }
 }
