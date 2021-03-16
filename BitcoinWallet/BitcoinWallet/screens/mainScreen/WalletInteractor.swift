@@ -20,4 +20,8 @@ class WalletInteractor: WalletViewDelegate{
     func fetchedBitcoinRate() -> NSFetchedResultsController<BitcoinRate> {
         return BitcoinRateService.fetchedBitcoinRate()
     }
+    
+    func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance> {
+        return CurrentBalanceService.fetchedCurrentBalance()
+    }
 }

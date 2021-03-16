@@ -11,6 +11,7 @@ import CoreData
 
 protocol WalletViewDelegate{
     func fetchedBitcoinRate() -> NSFetchedResultsController<BitcoinRate>
+    func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance>
 }
 
 class WalletViewController: BaseViewController,  WalletPresenterDelegate{
@@ -19,7 +20,10 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     var router: WalletRouter?
     
     private var currencyLabel: UILabel?
+    private var currentBalanceLabel: UILabel?
+    
     private var fetchedBitcoinRate: NSFetchedResultsController<BitcoinRate>?
+    private var fetchedCurrentBalance: NSFetchedResultsController<CurrentBalance>?
     
     override func settings() {
         super.settings()
@@ -28,6 +32,9 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         
         fetchedBitcoinRate = delegate?.fetchedBitcoinRate()
         fetchedBitcoinRate?.delegate = self
+        
+        fetchedCurrentBalance = delegate?.fetchedCurrentBalance()
+        fetchedCurrentBalance?.delegate = self
         
         setUI()
     }
@@ -83,12 +90,13 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         let currentBalanceTitle = ViewsManager.createLabel(font: .systemFont(ofSize: 16, weight: .medium), textAlignment: .left)
         currentBalanceTitle.text = "Current balance"
         
-        let currentBalanceLabel = ViewsManager.createLabel(font: .systemFont(ofSize: 24, weight: .semibold), textAlignment: .left)
-        currentBalanceLabel.text = "50₿"
+        currentBalanceLabel = ViewsManager.createLabel(font: .systemFont(ofSize: 24, weight: .semibold), textAlignment: .left)
+        updateCurrentBalanceLabelValue()
         
         balanceTextStack.addArrangedSubview(currentBalanceTitle)
-        balanceTextStack.addArrangedSubview(currentBalanceLabel)
-        
+        if let currentBalanceLabel = currentBalanceLabel {
+            balanceTextStack.addArrangedSubview(currentBalanceLabel)
+        }
         
         let addTransactionButton = CornerButton()
         addTransactionButton.setTitle("Replenish balance", for: .normal)
@@ -162,6 +170,10 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     
     func updateRateLabelValue() {
         currencyLabel?.text = fetchedBitcoinRate?.fetchedObjects?.first?.usdRate
+    }
+    
+    func updateCurrentBalanceLabelValue() {
+        currentBalanceLabel?.text = fetchedCurrentBalance?.fetchedObjects?.first?.currentBalance ?? CurrentBalanceService.defaultBalance
     }
     
     func showStartBusy() {

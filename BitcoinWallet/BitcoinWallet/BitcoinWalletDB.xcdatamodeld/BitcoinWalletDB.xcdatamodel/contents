@@ -9,7 +9,11 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="CurrentBalance" representedClassName=".CurrentBalance" syncable="YES" codeGenerationType="class">
+        <attribute name="balance" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
     <elements>
         <element name="BitcoinRate" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="CurrentBalance" positionX="-54" positionY="9" width="128" height="44"/>
     </elements>
 </model>
