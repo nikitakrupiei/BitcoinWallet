@@ -30,13 +30,16 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         WalletConfigurator.shared.configure(vc: self)
         setTopBarLightContentStyle()
         
+        setupFetchControllers()
+        setUI()
+    }
+    
+    private func setupFetchControllers() {
         fetchedBitcoinRate = delegate?.fetchedBitcoinRate()
         fetchedBitcoinRate?.delegate = self
         
         fetchedCurrentBalance = delegate?.fetchedCurrentBalance()
         fetchedCurrentBalance?.delegate = self
-        
-        setUI()
     }
     
     private func setUI() {

@@ -17,7 +17,7 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
     var delegate: ReplenishBalanceViewDelegate?
     var router: ReplenishBalanceRouter?
     
-    var amountTextField: UITextField?
+    var amountTextField: AmountValidationTextField?
     var currentBitcoinAmount: Int64 = 0
     
     override func settings() {
@@ -104,13 +104,8 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
     private func createReplenishTextField() -> UIView{
         let textFieldContainer = UIView()
         
-        amountTextField = UITextField()
-        amountTextField?.keyboardType = .numberPad
-        amountTextField?.borderStyle = .roundedRect
-        amountTextField?.font = .systemFont(ofSize: 20, weight: .semibold)
-        amountTextField?.textColor = AppColor.bitcoinGrey.color()
-        amountTextField?.height(50)
-        amountTextField?.delegate = self
+        amountTextField = AmountValidationTextField()
+        amountTextField?.currentBitcoinAmount = currentBitcoinAmount
         
         if let amountTextField = amountTextField {
             textFieldContainer.sv(amountTextField)
@@ -121,13 +116,13 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         return textFieldContainer
     }
     
-    func close() {
+    private func close() {
         willMove(toParent: nil)
         self.view.removeFromSuperview()
         removeFromParent()
     }
     
-    func showAnimation() {
+    private func showAnimation() {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         self.view.alpha = 0
         
@@ -137,7 +132,7 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         }
     }
     
-    @objc func removeAnimation() {
+    @objc private func removeAnimation() {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         self.view.alpha = 0
         
@@ -149,7 +144,7 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
         }
     }
     
-    @objc func replenishWallet() {
+    @objc private func replenishWallet() {
         guard let text = amountTextField?.text, !text.isEmpty, let newBalance = Int64(text) else {
             self.showError(message: "You must enter bitcoins amount to replenish")
             return
@@ -169,24 +164,5 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
 extension ReplenishBalanceViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return (touch.view === self.view)
-    }
-}
-
-extension ReplenishBalanceViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
-        guard !string.isEmpty, let text = textField.text else {
-            return true
-        }
-        
-        /// check number is postive and less then total amount of bitcoins in the world
-        let formatter = NumberFormatter()
-        let finalString = (text as NSString).replacingCharacters(in: range, with: string)
-        let number = formatter.number(from: finalString)
-        
-        guard let enteredNumber  = number?.int64Value else {
-            return false
-        }
-        return enteredNumber > 0 && enteredNumber < (BitcoinConfiguration.maximumBitcoinAmountInTheWorld - currentBitcoinAmount)
     }
 }
