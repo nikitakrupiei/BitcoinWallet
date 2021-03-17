@@ -7,6 +7,7 @@
 
 import UIKit
 
+//Manager for creating base UI elements
 class ViewsManager {
     static func createStackView(axis: NSLayoutConstraint.Axis = .vertical, alignment: UIStackView.Alignment = .fill, distribution: UIStackView.Distribution = .fill, spacing: CGFloat = 0) -> UIStackView {
         let stack = UIStackView()

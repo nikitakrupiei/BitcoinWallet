@@ -145,6 +145,7 @@ class ReplenishBalanceViewController: BaseViewController,  ReplenishBalancePrese
     }
     
     @objc private func replenishWallet() {
+        //minimum validation
         guard let text = amountTextField?.text, !text.isEmpty, let newBalance = Int64(text) else {
             self.showError(message: "You must enter bitcoins amount to replenish")
             return

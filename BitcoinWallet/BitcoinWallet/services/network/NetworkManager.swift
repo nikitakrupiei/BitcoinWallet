@@ -12,6 +12,7 @@ typealias responseHandler = (Data?, URLResponse?, Error?) -> Void
 typealias responseErrorHandler = (_ response:Error)->()
 typealias responseSuccessHandler = (_ data:Data)->()
 
+//protocol the can be implemented by any service and all the network stuff it'll de itself. Query parameters, encoded data, etc. can be added additionally
 protocol APIConfiguration {
     var method: HTTPMethod { get }
     var path: String { get }
@@ -76,16 +77,19 @@ enum APIError: Error {
 
 extension APIConfiguration {
     
+    //default value. Can be overriden in service for specific APIs
     var timeInterval: TimeInterval {
         return 60
     }
     
+    //function to add one entity to core data
     func addOne<Entity: NSManagedObject & Codable>(toStore context: NSManagedObjectContext, success:@escaping((Entity)->()), fail:@escaping(responseErrorHandler)){
         self.callRequest(success: { data in
             PersistentService.addOne(data: data, ofType: Entity.self, success: success, fail: fail)
         }, fail: fail)
     }
     
+    //base request
     private func callRequest(success:@escaping(responseSuccessHandler), fail:@escaping(responseErrorHandler)) {
         guard let request = Request(path: path, httpMethod: method, timeInterval: timeInterval) else {
             return
@@ -94,6 +98,7 @@ extension APIConfiguration {
     }
 }
 
+//Base API service with basic response validation
 class ApiService {
     static func execute(request: Request, success:@escaping(responseSuccessHandler), fail:@escaping(responseErrorHandler)) {
         send(request: request, completionHandler: { (data, response, error) in

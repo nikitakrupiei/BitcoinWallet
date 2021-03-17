@@ -7,6 +7,8 @@
 
 import Foundation
 
+//Different configurations in order to change something in one place and app will still work fine
+
 class EnvironmentConfiguration {
     
     static var baseApiUrl : URL? {

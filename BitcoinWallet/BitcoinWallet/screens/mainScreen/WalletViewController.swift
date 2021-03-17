@@ -259,6 +259,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         }
     }
     
+    // methods for future hiding and showing loader for API requests
     func showStartBusy() {
     }
     
@@ -316,6 +317,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
+    //function to fetch more data when scrolling
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         guard !reachedEnd else {
@@ -343,6 +345,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WalletViewController: NSFetchedResultsControllerDelegate{
     
+    //listener for CoreData changes
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
         if controller == fetchedBitcoinRate {
             updateRateLabelValue()

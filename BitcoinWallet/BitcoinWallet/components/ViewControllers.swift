@@ -12,6 +12,7 @@ protocol BaseViewControllerDelegate {
     var hideNavigationBar: Bool {get}
 }
 
+//Base view controller. To store same behavior in one placw
 class BaseViewController: UIViewController, BaseViewControllerDelegate {
     
     private var attachableTap: UITapGestureRecognizer?

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    //bitcoin rate response when app becoming active
     func applicationDidBecomeActive(_ application: UIApplication) {
         Application.shared.getBitcoinRate()
     }

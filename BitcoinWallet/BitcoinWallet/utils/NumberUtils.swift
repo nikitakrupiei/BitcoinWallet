@@ -7,7 +7,6 @@
 import Foundation
 
 extension Double {
-    
     func currencyFormat() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

@@ -110,6 +110,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C26642226026B04009FE1CC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				84D2602D2600D1CB00B9B332 /* BitcoinRate.swift */,
+				84D260902602130A00B9B332 /* Transaction.swift */,
+				84D2603E2600EE3500B9B332 /* CurrentBalance.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		84D25FC72600888400B9B332 = {
 			isa = PBXGroup;
 			children = (
@@ -222,10 +232,8 @@
 		84D2602C2600D1C000B9B332 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				84D2602D2600D1CB00B9B332 /* BitcoinRate.swift */,
+				4C26642226026B04009FE1CC /* Entity */,
 				84D260362600DF6800B9B332 /* Global.swift */,
-				84D2603E2600EE3500B9B332 /* CurrentBalance.swift */,
-				84D260902602130A00B9B332 /* Transaction.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";

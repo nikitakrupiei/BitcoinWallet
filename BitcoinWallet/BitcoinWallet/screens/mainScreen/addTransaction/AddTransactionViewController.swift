@@ -217,6 +217,7 @@ class AddTransactionViewController: BaseViewController,  AddTransactionPresenter
     }
     
     @objc private func addTransactionAction() {
+        //minimum validation
         guard let text = amountTextField?.text, !text.isEmpty, let amount = Int64(text) else {
             self.showError(message: "You must enter bitcoins amount to add transaction")
             return

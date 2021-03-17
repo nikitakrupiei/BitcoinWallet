@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+//Current bitcoin balance Coredata service
 class CurrentBalanceService {
     static func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance>{
         let context = PersistentService.context

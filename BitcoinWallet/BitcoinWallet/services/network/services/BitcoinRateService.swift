@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+//Bitcoin Rate API and Coredata service
 class BitcoinRateService {
     static func getBitcoinRate(success:@escaping((BitcoinRate) -> Void), fail:@escaping((Error) -> Void)){
         BitcoinRateServiceEndpoint.getBitcoinRate.addOne(toStore: PersistentService.context, success: success, fail: fail)

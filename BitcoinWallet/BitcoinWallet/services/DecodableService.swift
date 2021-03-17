@@ -11,6 +11,7 @@ extension CodingUserInfoKey {
     static let context = CodingUserInfoKey(rawValue: "context")!
 }
 
+// Service for decoding data
 class DecodableService {
     
     static func decodeOne<Entity: Decodable>(data: Data, context: NSManagedObjectContext, success:@escaping((Entity)->()), fail:@escaping((Error)->())){

@@ -37,6 +37,7 @@ class Application {
         })
     }
     
+    // check for request. 1 hour delay
     private var isNeedRateUpdate: Bool {
         guard let lastDateRateUpdated = lastDateRateUpdated else {
             return true

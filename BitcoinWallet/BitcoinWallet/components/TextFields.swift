@@ -24,6 +24,7 @@ class AmountValidationTextField: UITextField, UITextFieldDelegate {
         self.delegate = self
     }
     
+    //minimum validation
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         guard !string.isEmpty, let text = textField.text else {
