@@ -23,7 +23,7 @@ class DateUtils {
 
 extension Date {
     var simpleDay: String? {
-        return Formatter.onlyDay.string(from: self)
+        return Formatter.onlyDay.string(from: self.convertedDate)
     }
     
     var onlyDate: Date? {
