@@ -38,6 +38,14 @@
 		84D2604D2600F26300B9B332 /* ReplenishBalanceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260482600F26300B9B332 /* ReplenishBalanceInteractor.swift */; };
 		84D2604E2600F26300B9B332 /* ReplenishBalanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260492600F26300B9B332 /* ReplenishBalanceConfigurator.swift */; };
 		84D260742601E55F00B9B332 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260732601E55F00B9B332 /* TextFields.swift */; };
+		84D2607C2601F50A00B9B332 /* AddTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260772601F50A00B9B332 /* AddTransactionPresenter.swift */; };
+		84D2607D2601F50A00B9B332 /* AddTransactionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260782601F50A00B9B332 /* AddTransactionRouter.swift */; };
+		84D2607E2601F50A00B9B332 /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260792601F50A00B9B332 /* AddTransactionViewController.swift */; };
+		84D2607F2601F50A00B9B332 /* AddTransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2607A2601F50A00B9B332 /* AddTransactionInteractor.swift */; };
+		84D260802601F50A00B9B332 /* AddTransactionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2607B2601F50A00B9B332 /* AddTransactionConfigurator.swift */; };
+		84D260892601F83700B9B332 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260882601F83700B9B332 /* TransactionCell.swift */; };
+		84D2608E260210EA00B9B332 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2608D260210EA00B9B332 /* DateUtils.swift */; };
+		84D260912602130A00B9B332 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260902602130A00B9B332 /* Transaction.swift */; };
 		E18C495EB66218A6B8C268CE /* Pods_BitcoinWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +83,14 @@
 		84D260482600F26300B9B332 /* ReplenishBalanceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishBalanceInteractor.swift; sourceTree = "<group>"; };
 		84D260492600F26300B9B332 /* ReplenishBalanceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplenishBalanceConfigurator.swift; sourceTree = "<group>"; };
 		84D260732601E55F00B9B332 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		84D260772601F50A00B9B332 /* AddTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionPresenter.swift; sourceTree = "<group>"; };
+		84D260782601F50A00B9B332 /* AddTransactionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionRouter.swift; sourceTree = "<group>"; };
+		84D260792601F50A00B9B332 /* AddTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
+		84D2607A2601F50A00B9B332 /* AddTransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionInteractor.swift; sourceTree = "<group>"; };
+		84D2607B2601F50A00B9B332 /* AddTransactionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionConfigurator.swift; sourceTree = "<group>"; };
+		84D260882601F83700B9B332 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		84D2608D260210EA00B9B332 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		84D260902602130A00B9B332 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.debug.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitcoinWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.release.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +162,8 @@
 				84D25FF826008DC500B9B332 /* WalletPresenter.swift */,
 				84D25FF926008DC500B9B332 /* WalletRouter.swift */,
 				84D25FFC26008DC500B9B332 /* WalletConfigurator.swift */,
+				84D260872601F82300B9B332 /* cells */,
+				84D260762601F4F500B9B332 /* addTransaction */,
 				84D260442600F24A00B9B332 /* replenishBalance */,
 			);
 			path = mainScreen;
@@ -205,6 +223,7 @@
 				84D2602D2600D1CB00B9B332 /* BitcoinRate.swift */,
 				84D260362600DF6800B9B332 /* Global.swift */,
 				84D2603E2600EE3500B9B332 /* CurrentBalance.swift */,
+				84D260902602130A00B9B332 /* Transaction.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -213,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				84D260322600DEB900B9B332 /* NumberUtils.swift */,
+				84D2608D260210EA00B9B332 /* DateUtils.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -235,6 +255,26 @@
 				84D260492600F26300B9B332 /* ReplenishBalanceConfigurator.swift */,
 			);
 			path = replenishBalance;
+			sourceTree = "<group>";
+		};
+		84D260762601F4F500B9B332 /* addTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				84D260792601F50A00B9B332 /* AddTransactionViewController.swift */,
+				84D2607A2601F50A00B9B332 /* AddTransactionInteractor.swift */,
+				84D260772601F50A00B9B332 /* AddTransactionPresenter.swift */,
+				84D260782601F50A00B9B332 /* AddTransactionRouter.swift */,
+				84D2607B2601F50A00B9B332 /* AddTransactionConfigurator.swift */,
+			);
+			path = addTransaction;
+			sourceTree = "<group>";
+		};
+		84D260872601F82300B9B332 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				84D260882601F83700B9B332 /* TransactionCell.swift */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 		D37B03B26853C7CE420E0B50 /* Pods */ = {
@@ -370,12 +410,16 @@
 			files = (
 				84D260422600EFD800B9B332 /* CurrentBalanceService.swift in Sources */,
 				84D2603B2600E1A000B9B332 /* Application.swift in Sources */,
+				84D260892601F83700B9B332 /* TransactionCell.swift in Sources */,
 				84D2600D260093AB00B9B332 /* StyleSettings.swift in Sources */,
+				84D2607F2601F50A00B9B332 /* AddTransactionInteractor.swift in Sources */,
+				84D2607E2601F50A00B9B332 /* AddTransactionViewController.swift in Sources */,
 				84D2600126008DC500B9B332 /* WalletConfigurator.swift in Sources */,
 				84D2600626008DFC00B9B332 /* ViewControllers.swift in Sources */,
 				84D25FD42600888400B9B332 /* AppDelegate.swift in Sources */,
 				84D260372600DF6800B9B332 /* Global.swift in Sources */,
 				84D2603F2600EE3500B9B332 /* CurrentBalance.swift in Sources */,
+				84D260802601F50A00B9B332 /* AddTransactionConfigurator.swift in Sources */,
 				84D2604A2600F26300B9B332 /* ReplenishBalancePresenter.swift in Sources */,
 				84D260202600C81D00B9B332 /* BitcoinRateService.swift in Sources */,
 				84D2604E2600F26300B9B332 /* ReplenishBalanceConfigurator.swift in Sources */,
@@ -383,17 +427,21 @@
 				84D25FFD26008DC500B9B332 /* WalletPresenter.swift in Sources */,
 				84D260142600ABFD00B9B332 /* Buttons.swift in Sources */,
 				84D260232600CE0C00B9B332 /* PersistentService.swift in Sources */,
+				84D2607D2601F50A00B9B332 /* AddTransactionRouter.swift in Sources */,
 				84D2601C2600C04700B9B332 /* BuildConfiguration.swift in Sources */,
 				84D25FFE26008DC500B9B332 /* WalletRouter.swift in Sources */,
 				84D2604D2600F26300B9B332 /* ReplenishBalanceInteractor.swift in Sources */,
+				84D2607C2601F50A00B9B332 /* AddTransactionPresenter.swift in Sources */,
 				84D2604B2600F26300B9B332 /* ReplenishBalanceRouter.swift in Sources */,
 				84D260742601E55F00B9B332 /* TextFields.swift in Sources */,
+				84D260912602130A00B9B332 /* Transaction.swift in Sources */,
 				84D2602E2600D1CB00B9B332 /* BitcoinRate.swift in Sources */,
 				84D2602A2600D11A00B9B332 /* BitcoinWalletDB.xcdatamodeld in Sources */,
 				84D25FFF26008DC500B9B332 /* WalletViewController.swift in Sources */,
 				84D260262600CF7C00B9B332 /* DecodableService.swift in Sources */,
 				84D2604C2600F26300B9B332 /* ReplenishBalanceViewController.swift in Sources */,
 				84D2600026008DC500B9B332 /* WalletInteractor.swift in Sources */,
+				84D2608E260210EA00B9B332 /* DateUtils.swift in Sources */,
 				84D260332600DEB900B9B332 /* NumberUtils.swift in Sources */,
 				84D260112600956500B9B332 /* Views.swift in Sources */,
 			);
@@ -545,7 +593,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 493K3DK7Y5;
+				DEVELOPMENT_TEAM = JVAX7U4FD5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -568,7 +616,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 493K3DK7Y5;
+				DEVELOPMENT_TEAM = JVAX7U4FD5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

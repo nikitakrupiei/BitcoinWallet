@@ -17,12 +17,19 @@ class WalletRouter{
     }
     
     func navigateToReplenishBalance(currentBalance: Int64) {
-        let replenishView = ReplenishBalanceViewController(nibName: nil, bundle: nil)
-        replenishView.currentBitcoinAmount = currentBalance
+        let replenishViewController = ReplenishBalanceViewController()
+        replenishViewController.currentBitcoinAmount = currentBalance
         
-        self.vc.addChild(replenishView)
-        replenishView.view.frame = vc.view.frame
-        self.vc.view.addSubview(replenishView.view)
-        replenishView.didMove(toParent: vc)
+        self.vc.addChild(replenishViewController)
+        replenishViewController.view.frame = vc.view.frame
+        self.vc.view.addSubview(replenishViewController.view)
+        replenishViewController.didMove(toParent: vc)
+    }
+    
+    func navigateToAddTransaction(currentBalance: Int64) {
+        let addTransactionViewController = AddTransactionViewController()
+        addTransactionViewController.currentBitcoinAmount = currentBalance
+        
+        self.vc.navigationController?.pushViewController(addTransactionViewController, animated: true)
     }
 }

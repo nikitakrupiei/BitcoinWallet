@@ -101,18 +101,18 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
             balanceTextStack.addArrangedSubview(currentBalanceLabel)
         }
         
-        let addTransactionButton = CornerButton()
-        addTransactionButton.setTitle("Replenish balance", for: .normal)
-        addTransactionButton.backgroundColor = .white
-        addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
-        addTransactionButton.addTarget(self, action: #selector(navigateToReplenishBalance), for: .touchUpInside)
+        let replenishButton = CornerButton()
+        replenishButton.setTitle("Replenish balance", for: .normal)
+        replenishButton.backgroundColor = .white
+        replenishButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        replenishButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
+        replenishButton.addTarget(self, action: #selector(navigateToReplenishBalance), for: .touchUpInside)
         
         if let currencyLabel = currencyLabel {
             infoStack.addArrangedSubview(currencyLabel)
         }
         infoStack.addArrangedSubview(balanceTextStack)
-        infoStack.addArrangedSubview(addTransactionButton)
+        infoStack.addArrangedSubview(replenishButton)
         
         return infoStack
     }
@@ -141,7 +141,8 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.register(TransactionCell.self, forCellReuseIdentifier: TransactionCell.reusableIdentifier)
+        tableView.separatorStyle = .none
         
         let addTransactionButton = UIButton()
         addTransactionButton.layer.cornerRadius = 8
@@ -151,6 +152,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         addTransactionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         addTransactionButton.setTitleColor(AppColor.bitcoinGrey.color(), for: .normal)
         addTransactionButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        addTransactionButton.addTarget(self, action: #selector(navigateToAddTransaction), for: .touchUpInside)
         
         let addTransactionButttonStack = ViewsManager.createStackView(axis: .horizontal, spacing: 8)
         addTransactionButttonStack.addArrangedSubview(UIView())
@@ -164,7 +166,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         titleStack.fillHorizontally()
         
         transactionStack.addArrangedSubview(tableView)
-        tableView.fillHorizontally()
+        tableView.fillHorizontally(m: 16)
         
         transactionStack.addArrangedSubview(addTransactionButttonStack)
         addTransactionButttonStack.fillHorizontally(m: 16)
@@ -181,8 +183,15 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     }
     
     @objc func navigateToReplenishBalance() {
-        let currentBalance = fetchedCurrentBalance?.fetchedObjects?.first?.balance ?? 0
-        router?.navigateToReplenishBalance(currentBalance: currentBalance)
+        router?.navigateToReplenishBalance(currentBalance: getCurrentBalance())
+    }
+    
+    @objc func navigateToAddTransaction() {
+        router?.navigateToAddTransaction(currentBalance: getCurrentBalance())
+    }
+    
+    private func getCurrentBalance() -> Int64 {
+        return fetchedCurrentBalance?.fetchedObjects?.first?.balance ?? 0
     }
     
     func showStartBusy() {
@@ -198,9 +207,22 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Transaction : \(indexPath.row + 1)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionCell.reusableIdentifier, for: indexPath) as? TransactionCell else {
+            return UITableViewCell()
+        }
+        cell.transactionImage.image = #imageLiteral(resourceName: "closeIcon")
+        cell.transactionTitle.text = "Transaction: \(indexPath.row + 1)"
+        cell.selectionStyle = .none
+        cell.amountTitle.text = "10000"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
 

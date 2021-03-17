@@ -74,7 +74,3 @@ extension NSManagedObjectContext {
         }
     }
 }
-
-protocol NSSecureUnarchiveTransformer {
-    var allowedClasses: [AnyClass] { get }
-}

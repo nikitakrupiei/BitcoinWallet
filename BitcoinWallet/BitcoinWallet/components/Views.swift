@@ -25,6 +25,16 @@ class ViewsManager {
         label.textColor = textColor
         return label
     }
+    
+    static func createTextField(font: UIFont, textColor: UIColor = AppColor.bitcoinGrey.color(), keyboardType: UIKeyboardType = .default, borderStyle:  UITextField.BorderStyle = .roundedRect) -> UITextField {
+        let textField = UITextField()
+        textField.keyboardType = keyboardType
+        textField.borderStyle = borderStyle
+        textField.font = .systemFont(ofSize: 20, weight: .semibold)
+        textField.textColor = textColor
+        textField.height(50)
+        return textField
+    }
 }
 
 class CornerTopView: UIView {

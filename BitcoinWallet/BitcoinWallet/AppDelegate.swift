@@ -26,7 +26,7 @@ extension AppDelegate {
     func setInitialScreen(){
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav1 = UINavigationController()
-        let mainView = WalletViewController(nibName: nil, bundle: nil)
+        let mainView = WalletViewController()
         nav1.viewControllers = [mainView]
         self.window!.rootViewController = nav1
         self.window?.makeKeyAndVisible()

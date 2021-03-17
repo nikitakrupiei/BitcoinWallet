@@ -1,19 +1,19 @@
 //
-//  WalletPresenter.swift
+//  AddTransactionPresenter.swift
 //  BitcoinWallet
 //
-//  Created by admin on 16.03.2021.
+//  Created by admin on 17.03.2021.
 //
 
 import Foundation
 
-protocol WalletPresenterDelegate: BasePresenterDelegate{
+protocol AddTransactionPresenterDelegate: BasePresenterDelegate{
     func showStartBusy()
     func showStopBusy()
 }
 
-class WalletPresenter: WalletInteractorDelegate {
-    weak var delegate: WalletPresenterDelegate?
+class AddTransactionPresenter: AddTransactionInteractorDelegate {
+    weak var delegate: AddTransactionPresenterDelegate?
     
     func presentError(error: Error) {
         if let error = error as? APIError {
