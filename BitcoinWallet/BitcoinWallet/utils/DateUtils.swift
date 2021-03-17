@@ -25,6 +25,36 @@ extension Date {
     var simpleDay: String? {
         return Formatter.onlyDay.string(from: self)
     }
+    
+    var onlyDate: Date? {
+        get {
+            let calender = Calendar.current
+            var dateComponents = calender.dateComponents([.year, .month, .day], from: self)
+            dateComponents.timeZone = NSTimeZone.system
+            return calender.date(from: dateComponents)
+        }
+    }
+    
+    var convertedDate:Date {
+        
+        let dateFormatter = DateFormatter()
+        
+        let dateFormat = "dd MMM yyyy HH:mm:ss"
+        dateFormatter.dateFormat = dateFormat
+        let formattedDate = dateFormatter.string(from: self)
+        
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        
+        dateFormatter.dateFormat = dateFormat as String
+        let sourceDate = dateFormatter.date(from: formattedDate as String)
+        
+        return sourceDate!
+    }
+    
+    var startOfTheDay: Date{
+        return Calendar.current.startOfDay(for: self)
+    }
 }
 extension Formatter {
     static let onlyDay: DateFormatter = {

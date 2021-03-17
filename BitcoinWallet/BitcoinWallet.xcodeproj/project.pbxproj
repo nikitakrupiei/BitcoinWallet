@@ -46,6 +46,7 @@
 		84D260892601F83700B9B332 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260882601F83700B9B332 /* TransactionCell.swift */; };
 		84D2608E260210EA00B9B332 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2608D260210EA00B9B332 /* DateUtils.swift */; };
 		84D260912602130A00B9B332 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D260902602130A00B9B332 /* Transaction.swift */; };
+		84D26095260224FD00B9B332 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D26094260224FD00B9B332 /* TransactionService.swift */; };
 		E18C495EB66218A6B8C268CE /* Pods_BitcoinWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		84D260882601F83700B9B332 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		84D2608D260210EA00B9B332 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		84D260902602130A00B9B332 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		84D26094260224FD00B9B332 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		B0D9D21D0BE67F1A64568E62 /* Pods-BitcoinWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.debug.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B560D921CF04972C597815 /* Pods_BitcoinWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitcoinWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD2F5CAAC8789EFC29908CC /* Pods-BitcoinWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinWallet.release.xcconfig"; path = "Target Support Files/Pods-BitcoinWallet/Pods-BitcoinWallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				84D260172600BD4900B9B332 /* network */,
-				84D2601B2600C04700B9B332 /* BuildConfiguration.swift */,
 				84D260222600CE0C00B9B332 /* PersistentService.swift */,
 				84D260252600CF7C00B9B332 /* DecodableService.swift */,
 			);
@@ -213,6 +214,7 @@
 			children = (
 				84D2601F2600C81D00B9B332 /* BitcoinRateService.swift */,
 				84D260412600EFD800B9B332 /* CurrentBalanceService.swift */,
+				84D26094260224FD00B9B332 /* TransactionService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				84D2603A2600E1A000B9B332 /* Application.swift */,
+				84D2601B2600C04700B9B332 /* BuildConfiguration.swift */,
 			);
 			path = global;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				84D260372600DF6800B9B332 /* Global.swift in Sources */,
 				84D2603F2600EE3500B9B332 /* CurrentBalance.swift in Sources */,
 				84D260802601F50A00B9B332 /* AddTransactionConfigurator.swift in Sources */,
+				84D26095260224FD00B9B332 /* TransactionService.swift in Sources */,
 				84D2604A2600F26300B9B332 /* ReplenishBalancePresenter.swift in Sources */,
 				84D260202600C81D00B9B332 /* BitcoinRateService.swift in Sources */,
 				84D2604E2600F26300B9B332 /* ReplenishBalanceConfigurator.swift in Sources */,
@@ -593,7 +597,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JVAX7U4FD5;
+				DEVELOPMENT_TEAM = 493K3DK7Y5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,7 +620,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JVAX7U4FD5;
+				DEVELOPMENT_TEAM = 493K3DK7Y5;
 				INFOPLIST_FILE = BitcoinWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -40,12 +40,19 @@ class AmountValidationTextField: UITextField, UITextFieldDelegate {
         }
         
         var maxValue: Int64
+        var errorTitle: String
         
         switch purpose {
         case .replenish:
             maxValue = BitcoinConfiguration.maximumBitcoinAmountInTheWorld - currentBitcoinAmount
+            errorTitle = "You can't get as much bitcoins"
         case .transaction:
             maxValue = currentBitcoinAmount
+            errorTitle = "You don't have enough bitcoins on your account"
+        }
+        
+        if maxValue < enteredNumber {
+            Application.shared.topViewController?.showError(message: errorTitle)
         }
         
         return (0 ... maxValue) ~= enteredNumber

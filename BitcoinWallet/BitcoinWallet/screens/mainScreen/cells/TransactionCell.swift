@@ -32,6 +32,23 @@ class TransactionCell: UITableViewCell {
         return imageContainerView
     }
     
+    var transaction: Transaction? {
+        didSet{
+            selectionStyle = .none
+            
+            transactionTitle.text = transaction?.transactionCategory.rawValue
+            transactionImage.image = transaction?.transactionCategory.image
+            amountTitle.text = transaction?.transactionAmount
+            
+            switch transaction?.transactionCategory {
+            case .replenishment:
+                amountTitle.textColor = AppColor.green.color()
+            default:
+                amountTitle.textColor = AppColor.red.color()
+            }
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

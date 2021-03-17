@@ -108,6 +108,7 @@ class AddTransactionViewController: BaseViewController,  AddTransactionPresenter
         
         amountTextField = AmountValidationTextField()
         amountTextField?.currentBitcoinAmount = currentBitcoinAmount
+        amountTextField?.purpose = .transaction
         
         amountStack.addArrangedSubview(descriptionTitle)
         if let amountTextField = amountTextField {
@@ -217,7 +218,7 @@ class AddTransactionViewController: BaseViewController,  AddTransactionPresenter
     
     @objc private func addTransactionAction() {
         guard let text = amountTextField?.text, !text.isEmpty, let amount = Int64(text) else {
-            self.showError(message: "You must enter bitcoins amount to replenish")
+            self.showError(message: "You must enter bitcoins amount to add transaction")
             return
         }
         delegate?.addTransaction(amount: amount, date: selectedDate, category: selectedCategory)

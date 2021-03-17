@@ -12,6 +12,8 @@ import CoreData
 protocol WalletViewDelegate{
     func fetchedBitcoinRate() -> NSFetchedResultsController<BitcoinRate>
     func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance>
+    func fetchedTransactions() -> NSFetchedResultsController<Transaction>
+    func performFetch(for controller: NSFetchedResultsController<Transaction>, limit: Int) -> NSFetchedResultsController<Transaction>
 }
 
 class WalletViewController: BaseViewController,  WalletPresenterDelegate{
@@ -24,6 +26,27 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
     
     private var fetchedBitcoinRate: NSFetchedResultsController<BitcoinRate>?
     private var fetchedCurrentBalance: NSFetchedResultsController<CurrentBalance>?
+    private var fetchedTransactions: NSFetchedResultsController<Transaction>?
+    
+    var reachedEnd = false
+    var currentLimit = CoreDataConfiguration.paginationStep
+    
+    var transactionsNoDataStack: UIStackView?{
+        didSet{
+            transactionsNoDataStack?.isHidden = true
+            transactionsNoDataStack?.alpha = 0
+        }
+    }
+    
+    var tableView: UITableView?{
+        didSet{
+            tableView?.dataSource = self
+            tableView?.delegate = self
+            tableView?.register(TransactionCell.self, forCellReuseIdentifier: TransactionCell.reusableIdentifier)
+            tableView?.separatorStyle = .none
+            tableView?.showsVerticalScrollIndicator = false
+        }
+    }
     
     override func settings() {
         super.settings()
@@ -32,6 +55,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         
         setupFetchControllers()
         setUI()
+        handleNoData()
     }
     
     private func setupFetchControllers() {
@@ -40,6 +64,9 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         
         fetchedCurrentBalance = delegate?.fetchedCurrentBalance()
         fetchedCurrentBalance?.delegate = self
+        
+        fetchedTransactions = delegate?.fetchedTransactions()
+        fetchedTransactions?.delegate = self
     }
     
     private func setUI() {
@@ -67,7 +94,6 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         mainStackView.Leading == view.safeAreaLayoutGuide.Leading
         mainStackView.Trailing == view.safeAreaLayoutGuide.Trailing
         
-        
         return mainStackView
     }
     
@@ -79,7 +105,6 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         
         backgroundView.fillHorizontally().top(0)
         backgroundView.Bottom == view.safeAreaLayoutGuide.Bottom
-        
     }
     
     private func createMainInfoStack() -> UIStackView {
@@ -124,6 +149,14 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         cornerView.sv(transactionStack)
         transactionStack.fillHorizontally().top(8).bottom(8)
         
+        transactionsNoDataStack = addTransactionsNoDataStack()
+        
+        if let transactionsNoDataStack = transactionsNoDataStack {
+            cornerView.sv(transactionsNoDataStack)
+            transactionsNoDataStack.fillHorizontally()
+            transactionsNoDataStack.centerVertically()
+        }
+        
         return cornerView
     }
     
@@ -138,11 +171,7 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         separatorView.backgroundColor = .lightGray
         separatorView.height(1)
         
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(TransactionCell.self, forCellReuseIdentifier: TransactionCell.reusableIdentifier)
-        tableView.separatorStyle = .none
+        tableView = UITableView()
         
         let addTransactionButton = UIButton()
         addTransactionButton.layer.cornerRadius = 8
@@ -165,13 +194,42 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         transactionStack.addArrangedSubview(titleStack)
         titleStack.fillHorizontally()
         
-        transactionStack.addArrangedSubview(tableView)
-        tableView.fillHorizontally(m: 16)
+        if let tableView = tableView {
+            transactionStack.addArrangedSubview(tableView)
+            tableView.fillHorizontally(m: 16)
+        }
         
         transactionStack.addArrangedSubview(addTransactionButttonStack)
         addTransactionButttonStack.fillHorizontally(m: 16)
         
         return transactionStack
+    }
+    
+    func addTransactionsNoDataStack() -> UIStackView {
+        let transactionsNoDataStack = ViewsManager.createStackView(alignment: .center, spacing: 16)
+        
+        let noDataImage = UIImageView()
+        noDataImage.size(150)
+        noDataImage.image = #imageLiteral(resourceName: "transactions-no-data")
+        
+        let noDataTitle = ViewsManager.createLabel(numberOfLines: 2, font: .systemFont(ofSize: 24, weight: .semibold), textAlignment: .center)
+        noDataTitle.text = "Oops... No transactions found"
+        
+        
+        let noDataDescription = ViewsManager.createLabel(numberOfLines: 0, font: .systemFont(ofSize: 16, weight: .medium), textAlignment: .center)
+        noDataDescription.text = "Add new transaction by clicking \"Add transaction\" button"
+        
+        
+        let transactionsNoDataTitleStack = ViewsManager.createStackView(spacing: 4)
+        
+        transactionsNoDataTitleStack.addArrangedSubview(noDataTitle)
+        transactionsNoDataTitleStack.addArrangedSubview(noDataDescription)
+        
+        transactionsNoDataStack.addArrangedSubview(noDataImage)
+        transactionsNoDataStack.addArrangedSubview(transactionsNoDataTitleStack)
+        transactionsNoDataTitleStack.fillHorizontally()
+        
+        return transactionsNoDataStack
     }
     
     func updateRateLabelValue() {
@@ -194,6 +252,13 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
         return fetchedCurrentBalance?.fetchedObjects?.first?.balance ?? 0
     }
     
+    private func handleNoData() {
+        UIView.animate(withDuration: 0.5) { [self] in
+            transactionsNoDataStack?.alpha = fetchedTransactions?.sections?.count == 0 ? 1 : 0
+            transactionsNoDataStack?.isHidden = fetchedTransactions?.sections?.count != 0
+        }
+    }
+    
     func showStartBusy() {
     }
     
@@ -202,19 +267,45 @@ class WalletViewController: BaseViewController,  WalletPresenterDelegate{
 }
 
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var sectionCount: Int = 0
+        if let sections = fetchedTransactions?.sections, !sections.isEmpty {
+            sectionCount = sections.count
+        }
+        
+        return sectionCount
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        if let sections = fetchedTransactions?.sections, !sections.isEmpty {
+            return sections[section].numberOfObjects
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionCell.reusableIdentifier, for: indexPath) as? TransactionCell else {
             return UITableViewCell()
         }
-        cell.transactionImage.image = #imageLiteral(resourceName: "closeIcon")
-        cell.transactionTitle.text = "Transaction: \(indexPath.row + 1)"
-        cell.selectionStyle = .none
-        cell.amountTitle.text = "10000"
+        cell.transaction = fetchedTransactions?.object(at: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let container = UIView()
+        container.backgroundColor = .white
+        container.height(60)
+        let label = ViewsManager.createLabel(font: .systemFont(ofSize: 16, weight: .medium), textAlignment: .center)
+        
+        container.sv(label)
+        label.fillContainer()
+        label.text = (fetchedTransactions?.sections?[section].objects?.first as? Transaction)?.date?.simpleDay
+        return container
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -223,6 +314,30 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard !reachedEnd else {
+            return
+        }
+        
+        let offSetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offSetY >= contentHeight - scrollView.frame.height * 2{
+            guard let cont = fetchedTransactions else {
+                return
+            }
+            currentLimit += CoreDataConfiguration.paginationStep
+            fetchedTransactions = delegate?.performFetch(for: cont, limit: currentLimit)
+            
+            
+            if fetchedTransactions?.fetchedObjects?.count ?? 0 < currentLimit {
+                reachedEnd = true
+            }
+
+            tableView?.reloadData()
+        }
     }
 }
 
@@ -233,6 +348,9 @@ extension WalletViewController: NSFetchedResultsControllerDelegate{
             updateRateLabelValue()
         } else if controller == fetchedCurrentBalance {
             updateCurrentBalanceLabelValue()
+        } else if controller == fetchedTransactions {
+            handleNoData()
+            tableView?.reloadData()
         }
     }
 }

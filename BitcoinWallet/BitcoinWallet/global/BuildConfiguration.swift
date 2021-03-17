@@ -26,3 +26,7 @@ class NetworkPauseConfiguration {
 class BitcoinConfiguration {
     static var maximumBitcoinAmountInTheWorld: Int64 = 21_000_000
 }
+
+class CoreDataConfiguration {
+    static var paginationStep = 20
+}

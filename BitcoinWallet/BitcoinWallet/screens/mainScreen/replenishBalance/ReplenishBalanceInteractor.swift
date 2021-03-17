@@ -19,6 +19,7 @@ class ReplenishBalanceInteractor: ReplenishBalanceViewDelegate{
     
     func replenishBalance(balance: Int64) {
         CurrentBalanceService.replenishBalance(balance: balance)
+        TransactionService.addTransaction(amount: balance, date: Date(), category: .replenishment)
     }
     
     private func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance> {

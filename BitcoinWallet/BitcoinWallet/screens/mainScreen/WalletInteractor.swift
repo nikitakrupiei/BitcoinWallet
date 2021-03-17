@@ -24,4 +24,13 @@ class WalletInteractor: WalletViewDelegate{
     func fetchedCurrentBalance() -> NSFetchedResultsController<CurrentBalance> {
         return CurrentBalanceService.fetchedCurrentBalance()
     }
+    
+    func fetchedTransactions() -> NSFetchedResultsController<Transaction> {
+        let controller = TransactionService.fetchedTransactionsController
+        return self.performFetch(for: controller, limit: 20)
+    }
+    
+    func performFetch(for controller: NSFetchedResultsController<Transaction>, limit: Int) -> NSFetchedResultsController<Transaction> {
+        return TransactionService.performFetch(limit: limit, for: controller)
+    }
 }

@@ -17,6 +17,7 @@ class AddTransactionInteractor: AddTransactionViewDelegate{
     var delegate: AddTransactionInteractorDelegate?
     
     func addTransaction(amount: Int64, date: Date, category: TransactionCategory) {
-        
+        CurrentBalanceService.replenishBalance(balance: -amount)
+        TransactionService.addTransaction(amount: amount, date: date, category: category)
     }
 }
